@@ -58,6 +58,14 @@ function reform(wr){
     ref_but.type="button";
     ref_but.value="Reform the sentence";
     ref_but.style.display="inline";
+    ref_but.style.margin="0px 5px";
+
+    chk_but=document.createElement("input");
+    chk_but.type="button";
+    chk_but.value="Check correctness of the sentence";
+    chk_but.style.display="inline";
+    chk_but.style.margin="0px 5px";
+
     document.getElementById("formedsentence").innerHTML=sen;
     for(i=0;i<wr.length;i++){
         btns[i]=document.createElement("input");
@@ -75,6 +83,9 @@ function reform(wr){
         ref_but.onclick=function(){
             reform(wr);
         };
+        if(sen.split(" ").length==wr.length+1){
+            t_b.appendChild(chk_but);
+        }
         document.getElementById("formed").innerHTML="<b>Formed Sentence</b>(after selecting words)";
     };
 
