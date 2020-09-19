@@ -22,9 +22,8 @@ var hindicorpus=[["राम और श्याम बाजार गयें
 
 
 function language(){
-    document.getElementById("p1").innerHTML="<b>Form a sen (Declarative or Interrogative or any other type) from the given wr</b><br>(select the buttons in proper order)";
-    div=document.getElementById("word_buttons");
-    div.innerHTML="";
+    document.getElementById("p1").innerHTML="<b>Form a sentence (Declarative or Interrogative or any other type) from the given word</b><br>(select the buttons in proper order)";
+    
     if(document.getElementById("lang").value=="english"){
         corpus=englishcorpus;
     }
@@ -35,13 +34,29 @@ function language(){
     sen=corpus[index][0];
     wr=sen.split(" ");
     console.log(wr);
+    reform(wr);
+}
+function reform(words){
+    division=document.getElementById("word_buttons");
+    division.innerHTML="";
+
     for(i=0;i<wr.length;i++){
         ind=Math.floor(Math.random()*wr.length);
         temp=wr[ind];
         wr[ind]=wr[i];
         wr[i]=temp;
     }
-    btns=[]
+    btns=[];
+    sen="";
+
+    t_b=document.getElementById("ch_buttons");
+    t_b.innerHTML="";
+
+    ref_but=document.createElement("input");
+    ref_but.type="button";
+    ref_but.value="Reform the sentence";
+    ref_but.style.display="inline";
+    document.getElementById("demo").innerHTML=sen;
     for(i=0;i<wr.length;i++){
         btns[i]=document.createElement("input");
         btns[i].type="button";
@@ -50,6 +65,15 @@ function language(){
         btns[i].style.margin="0px 5px";
         div.appendChild(btns[i]);
     }
-    console.log(btns);
+    but[i].onclick=function(){
+        sen+=this.value+" ";
+        document.getElementById("demo").innerHTML=sen;
+        this.style.display="none";
+        t_b.appendChild(ref_but);
+        ref_but.onclick=function(){
+            reform(wr);
+        };
+    };
+
 
 } 
