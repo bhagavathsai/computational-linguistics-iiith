@@ -34,11 +34,7 @@ function language(){
     sen=corpus[index][0];
     wr=sen.split(" ");
     console.log(wr);
-    reform(wr);
-}
-function reform(words){
-    division=document.getElementById("word_buttons");
-    division.innerHTML="";
+    
 
     for(i=0;i<wr.length;i++){
         ind=Math.floor(Math.random()*wr.length);
@@ -46,17 +42,23 @@ function reform(words){
         wr[ind]=wr[i];
         wr[i]=temp;
     }
+    reform(wr);
+}
+function reform(wr){
+    div=document.getElementById("word_buttons");
+    t_b=document.getElementById("ch_buttons");
+
     btns=[];
     sen="";
 
-    t_b=document.getElementById("ch_buttons");
+    
     t_b.innerHTML="";
-
+    document.getElementById("formed").innerHTML="";
     ref_but=document.createElement("input");
     ref_but.type="button";
     ref_but.value="Reform the sentence";
     ref_but.style.display="inline";
-    document.getElementById("demo").innerHTML=sen;
+    document.getElementById("formedsentence").innerHTML=sen;
     for(i=0;i<wr.length;i++){
         btns[i]=document.createElement("input");
         btns[i].type="button";
@@ -67,12 +69,13 @@ function reform(words){
     }
     but[i].onclick=function(){
         sen+=this.value+" ";
-        document.getElementById("demo").innerHTML=sen;
+        document.getElementById("formedsentence").innerHTML=sen;
         this.style.display="none";
         t_b.appendChild(ref_but);
         ref_but.onclick=function(){
             reform(wr);
         };
+        document.getElementById("formed").innerHTML="<b>Formed Sentence</b>(after selecting words)";
     };
 
 
