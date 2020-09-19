@@ -110,7 +110,7 @@ function reform(wr,index,corpus){
                     mssg=document.createElement("p");
                     mssg.innerHTML="Wrong answer!!!<br>";
                     ending.appendChild(mssg);
-                    
+                    ending.appendChild(crrt);
                 }
             };
         }
@@ -130,6 +130,4 @@ function reform(wr,index,corpus){
             crrct.value="GET ANSWERS";
         }
     };
-
-
 } 
