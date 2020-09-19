@@ -55,11 +55,15 @@ function checksentence(sen,index,corpus){
 function reform(wr,index,corpus){
     div=document.getElementById("word_buttons");
     t_b=document.getElementById("ch_buttons");
-
+    ending=document.getElementById("ending");
+    ans="";
+    for(i=0;i<corpus[index].length;i++){
+        ans+=corpus[index][i]+"<br>";
+    }
     btns=[];
     sen="";
 
-    
+    div.innerHTML="";
     t_b.innerHTML="";
     ending.innerHTML="";
     document.getElementById("formed").innerHTML="";
@@ -75,6 +79,10 @@ function reform(wr,index,corpus){
     chk_but.style.display="inline";
     chk_but.style.margin="0px 5px";
 
+    crrct=document.createElement("input");
+    crrct.type="button";
+    crrct.value="GET CORRECT SENTENCE";
+
     document.getElementById("formedsentence").innerHTML=sen;
     for(i=0;i<wr.length;i++){
         btns[i]=document.createElement("input");
@@ -82,15 +90,13 @@ function reform(wr,index,corpus){
         btns[i].value=wr[i];
         btns[i].style.display="inline";
         btns[i].style.margin="0px 5px";
-        div.appendChild(btns[i]);
-    }
-    but[i].onclick=function(){
+    btns[i].onclick=function(){
         sen+=this.value+" ";
         document.getElementById("formedsentence").innerHTML=sen;
         this.style.display="none";
         t_b.appendChild(ref_but);
         ref_but.onclick=function(){
-            reform(words,index,corpus);
+            reform(wr,index,corpus);
         };
         if(sen.split(" ").length==wr.length+1){
             t_b.appendChild(chk_but);
@@ -104,17 +110,14 @@ function reform(wr,index,corpus){
                     mssg=document.createElement("p");
                     mssg.innerHTML="Wrong answer!!!<br>";
                     ending.appendChild(mssg);
-                    crrct=document.createElement("input");
-                    crrct.type="button";
-                    crrct.value="GET CORRECT SENTENCE";
-                    ending.appendChild(crrct);
+                    
                 }
             };
         }
         document.getElementById("formed").innerHTML="<b>Formed Sentence</b>(after selecting words)";
     };
     div.appendChild(btns[i]);
-    
+    }
     crrct.onclick=function(){
         if(crrct.value=="GET CORRECT SENTENCE" || crrct.value=="GET ANSWERS"){
             answer=document.createElement("p");
