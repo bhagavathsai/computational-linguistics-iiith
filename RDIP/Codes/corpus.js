@@ -42,9 +42,17 @@ function language(){
         wr[ind]=wr[i];
         wr[i]=temp;
     }
-    reform(wr);
+    reform(wr,index,corpus);
 }
-function reform(wr){
+function checksentence(sen,index,corpus){
+    for(i=0;i<corpus[index].length;i++){
+        if(sen==corpus[index][i]){
+            return true;
+        }
+    }
+    return false;
+}
+function reform(wr,index,corpus){
     div=document.getElementById("word_buttons");
     t_b=document.getElementById("ch_buttons");
 
@@ -53,6 +61,7 @@ function reform(wr){
 
     
     t_b.innerHTML="";
+    ending.innerHTML="";
     document.getElementById("formed").innerHTML="";
     ref_but=document.createElement("input");
     ref_but.type="button";
@@ -81,10 +90,26 @@ function reform(wr){
         this.style.display="none";
         t_b.appendChild(ref_but);
         ref_but.onclick=function(){
-            reform(wr);
+            reform(words,index,corpus);
         };
         if(sen.split(" ").length==wr.length+1){
             t_b.appendChild(chk_but);
+            chk_but.onclick=function(){
+                if(checksentence(sen.trim(),index,corpus)){
+                    mssg=document.createElement("p");
+                    mssg.innerHTML="Right answer!!!<br>";
+                    ending.appendChild(mssg);
+                }
+                else{
+                    mssg=document.createElement("p");
+                    mssg.innerHTML="Wrong answer!!!<br>";
+                    ending.appendChild(mssg);
+                    crrct=document.createElement("input");
+                    crrct.type="button";
+                    crrct.value="GET CORRECT SENTENCE";
+                    ending.appendChild(crrct);
+                }
+            };
         }
         document.getElementById("formed").innerHTML="<b>Formed Sentence</b>(after selecting words)";
     };
