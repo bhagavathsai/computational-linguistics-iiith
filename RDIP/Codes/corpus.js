@@ -113,6 +113,20 @@ function reform(wr,index,corpus){
         }
         document.getElementById("formed").innerHTML="<b>Formed Sentence</b>(after selecting words)";
     };
+    div.appendChild(btns[i]);
+    
+    crrct.onclick=function(){
+        if(crrct.value=="GET CORRECT SENTENCE" || crrct.value=="GET ANSWERS"){
+            answer=document.createElement("p");
+            answer.innerHTML=ans;
+            ending.appendChild(answer);
+            crrct.value="Hide The correct sentence";
+        }
+        else{
+            answer.innerHTML="";
+            crrct.value="GET ANSWERS";
+        }
+    };
 
 
 } 
